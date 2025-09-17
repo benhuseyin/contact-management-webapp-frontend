@@ -1,15 +1,13 @@
-import { Fragment } from 'react/jsx-runtime'
 import './App.css'
-import { Button } from './components/ui/button'
-import { Input } from './components/ui/input'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { routes } from './routes/appRoutes';
 
 function App() {
+  const router = createBrowserRouter(routes);
+
 
   return (
-      <Fragment>
-        <Input />
-        <Button>Login</Button>
-      </Fragment>
+    <RouterProvider router={router} />  
   )
 }
 
