@@ -6,6 +6,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import classNames from "classnames"
 
 export const LoginSchema = z.object({
     email: z.email({ message: 'Please entrey a valid email address.', pattern: /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i }).min(1, { message: "E-mail alanı boş bırakılamaz." }),
@@ -31,7 +32,7 @@ const LoginScreen = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasAnimation(false);
-        }, 10000); // 10 saniye = 10000ms
+        }, 5000); // 10 saniye = 10000ms
 
         // cleanup
         return () => clearTimeout(timer);
@@ -52,7 +53,9 @@ const LoginScreen = () => {
             <img
                 src={RedBgImage}
                 alt="Login background"
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin"
+                className={classNames("absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90", {
+                    "animate-spin": hasAnimation
+                })}
             />
 
 
