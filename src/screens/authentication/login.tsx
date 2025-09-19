@@ -5,7 +5,7 @@ import RedBgImage from "@/assets/images/RegisterBackground.webp"
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const LoginSchema = z.object({
     email: z.email({ message: 'Please entrey a valid email address.', pattern: /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i }).min(1, { message: "E-mail alanı boş bırakılamaz." }),
@@ -20,7 +20,7 @@ export const LoginSchema = z.object({
 export type LoginFormData = z.infer<typeof LoginSchema>;
 
 const LoginScreen = () => {
-    const [hasAnimation, setHasAnimation] = useState();
+    const [hasAnimation, setHasAnimation] = useState(true);
 
     const {
         register,
@@ -28,13 +28,19 @@ const LoginScreen = () => {
         formState: { errors },
     } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setHasAnimation(false);
+        }, 10000); // 10 saniye = 10000ms
+
+        // cleanup
+        return () => clearTimeout(timer);
+    }, []);
+
     const submit = (data: LoginFormData) => {
         console.log(data);
     };
 
-    const handleStopAnimation = () => {
-
-    }
 
     return (
         <div className="flex">
