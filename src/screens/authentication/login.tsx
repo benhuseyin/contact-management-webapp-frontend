@@ -2,23 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import BgImage from "@/assets/images/LoginBackground.webp"
 import RedBgImage from "@/assets/images/RegisterBackground.webp"
-import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import classNames from "classnames"
-
-export const LoginSchema = z.object({
-    email: z.email({ message: 'Please entrey a valid email address.', pattern: /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i }).min(1, { message: "E-mail alanı boş bırakılamaz." }),
-    password: z.string()
-        .min(8, { message: "Password must be at least 8 characters long" })
-        .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
-        .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
-        .regex(/[0-9]/, { message: "Password must contain at least one number" })
-        .regex(/[^A-Za-z0-9]/, { message: "Password must contain at least one special character" }),
-});
-
-export type LoginFormData = z.infer<typeof LoginSchema>;
+import { LoginSchema } from "@/utils/schemas";
+import type { LoginFormData } from "@/utils/types";
 
 const LoginScreen = () => {
     const [hasAnimation, setHasAnimation] = useState(true);
@@ -32,7 +21,7 @@ const LoginScreen = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasAnimation(false);
-        }, 5000); // 10 saniye = 10000ms
+        }, 5000);
 
         // cleanup
         return () => clearTimeout(timer);
