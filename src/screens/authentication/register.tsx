@@ -1,18 +1,26 @@
+import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
+import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { LoginSchema } from "@/utils/schemas";
+import type { LoginFormData } from "@/utils/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 const RegisterScreen = () => {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
+
+    const submit = (data: LoginFormData) => {
+        console.log(data);
+    };
     return (
         <div className="flex">
-            <img
-                src={BgImage}
-                alt="Login background"
-                className="absolute left-1/2 top-1/2 -translate-1/2"
-            />
-            <img
-                src={RedBgImage}
-                alt="Login background"
-                className={classNames("absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90", {
-                    "animate-spin": hasAnimation
-                })}
-            />
+            <BackgroundImages />
 
 
             <div className="border border-black z-50 p-10 rounded-sm space-y-10 shadow-lg text-neutral-200 backdrop-blur-xl !text-black">
