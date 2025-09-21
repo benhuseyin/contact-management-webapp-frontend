@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import classNames from "classnames"
 import { LoginSchema } from "@/utils/schemas";
 import type { LoginFormData } from "@/utils/types";
+import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
 
 const LoginScreen = () => {
     const [hasAnimation, setHasAnimation] = useState(true);
@@ -49,10 +50,7 @@ const LoginScreen = () => {
 
 
             <div className="border border-black z-50 p-10 rounded-sm space-y-10 shadow-lg text-neutral-200 backdrop-blur-xl !text-black">
-                <div className="space-y-2.5 z-50">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter Your Username & Password</p>
-                </div>
+                <CardHeader title="Welcome Back!" description="Enter Your Username & Password" />
 
                 <form className="space-y-5 z-50" onSubmit={handleSubmit(submit)}>
                     <div className="space-y-2">
