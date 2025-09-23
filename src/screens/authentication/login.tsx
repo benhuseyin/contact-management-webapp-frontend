@@ -6,11 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/utils/schemas";
 import type { LoginFormData } from "@/utils/types";
 import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
-import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
 import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
 import { useAppSelector } from "@/app/hooks";
 import { Link } from "react-router-dom";
-
+import BgImage from "@/assets/images/LoginBackground.webp"
+import BackgroundImage from "@/components/ScreenComponents/Onboarding/BackgroundImage";
 
 const LoginScreen = () => {
 
@@ -31,7 +31,8 @@ const LoginScreen = () => {
     return (
         <div className="flex">
 
-            <BackgroundImages />
+            <BackgroundImage wrapperClassNames="rotate-90" imgSrc={BgImage} />
+
 
             <OnboardingPageWrapper classNames="sm:!w-[450px]">
                 <CardHeader title="Welcome Back!" description="Enter Your Username & Password" />

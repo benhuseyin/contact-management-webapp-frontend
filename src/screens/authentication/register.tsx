@@ -1,4 +1,4 @@
-import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
+import BackgroundImage from "@/components/ScreenComponents/Onboarding/BackgroundImage";
 import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
 import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { RegisterSchema } from "@/utils/schemas";
 import type { RegisterFormData } from "@/utils/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import BgImage from "@/assets/images/RegisterBackground.webp"
 
 const RegisterScreen = () => {
 
@@ -22,7 +23,7 @@ const RegisterScreen = () => {
 
     return (
         <div className="flex">
-            <BackgroundImages />
+            <BackgroundImage imgSrc={BgImage} />
 
             <OnboardingPageWrapper>
                 <CardHeader
@@ -53,7 +54,7 @@ const RegisterScreen = () => {
                     </div>
 
 
-                    <Button type="submit" className="mt-5">LOGIN</Button>
+                    <Button type="submit" className="mt-5">REGISTER</Button>
                 </form>
             </OnboardingPageWrapper>
 
