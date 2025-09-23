@@ -10,8 +10,14 @@ import { useForm } from "react-hook-form";
 import BgImage from "@/assets/images/RegisterBackground.webp"
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
 import { Link } from "react-router-dom";
+import { useRegisterUserMutation } from "@/services/auth";
+import { useAppDispatch } from "@/app/hooks";
+import { setUser } from "@/features/user/user";
 
 const RegisterScreen = () => {
+    const [registerUser] = useRegisterUserMutation();
+
+    const dispatch = useAppDispatch();
 
     const {
         register,
@@ -19,9 +25,25 @@ const RegisterScreen = () => {
         formState: { errors },
     } = useForm<RegisterFormData>({ resolver: zodResolver(RegisterSchema) });
 
-    const submit = (data: RegisterFormData) => {
-        console.log(data);
+    const submit = async (data: RegisterFormData) => {
+        try {
+            const result = await registerUser({
+                username: data.username,
+                email: data.email,
+                password: data.password,
+            }).unwrap();
+
+            dispatch(setUser({
+                id: result._id,
+                username: data.username,
+                email: data.email
+            }));
+            console.log('User registered:', result);
+        } catch (err) {
+            console.error(err);
+        }
     };
+
 
     return (
         <div className="flex">
