@@ -3,7 +3,7 @@ import z from "zod";
 export const emailRegex = /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i
 
 export const LoginSchema = z.object({
-    email: z.email({ message: 'Please entrey a valid email address.', pattern: emailRegex }).min(1, { message: "E-mail alanı boş bırakılamaz." }),
+    email: z.email({ message: 'Please entrey a valid email address.', pattern: emailRegex }).min(1, { message: "The E-mail field cannot be left blank." }),
     password: z.string()
         .min(8, { message: "Password must be at least 8 characters long" })
         .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
@@ -13,7 +13,8 @@ export const LoginSchema = z.object({
 });
 
 export const RegisterSchema = z.object({
-    email: z.email({ message: 'Please entrey a valid email address.', pattern: emailRegex }).min(1, { message: "E-mail alanı boş bırakılamaz." }),
+    username: z.string().min(1, { message: "The email field cannot be left blank." }).max(50, { message: "Username cannot exceed 50 characters." }),
+    email: z.email({ message: 'Please entrey a valid email address.', pattern: emailRegex }).min(1, { message: "The email field cannot be left blank." }),
     password: z.string()
         .min(8, { message: "Password must be at least 8 characters long" })
         .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
