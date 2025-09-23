@@ -10,7 +10,7 @@ const CardHeader = ({ classNames, title, description }: Props) => {
     return (
         <div className={twMerge("space-y-2.5 z-50", classNames)}>
             <h1>{title}</h1>
-            <p>{description}</p>
+            <p className="sm:max-w-[80%] sm:mx-auto">{description}</p>
         </div>
     )
 }

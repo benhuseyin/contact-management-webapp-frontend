@@ -24,7 +24,11 @@ const RegisterScreen = () => {
             <BackgroundImages />
 
             <div className="border border-black z-50 p-10 rounded-sm space-y-10 shadow-lg text-neutral-200 backdrop-blur-xl !text-black">
-                <CardHeader title="Welcome to Contact Management App!" description="Register to Contact Management App, and start organize your contacts!" />
+                <CardHeader
+                    classNames="max-w-[419px]"
+                    title="Welcome to Contact Management App!"
+                    description="Register to Contact Management App, and start organize your contacts!"
+                />
 
                 <form className="space-y-5 z-50" onSubmit={handleSubmit(submit)}>
                     <div className="space-y-2">
