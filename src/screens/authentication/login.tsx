@@ -8,8 +8,13 @@ import type { LoginFormData } from "@/utils/types";
 import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
 import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
 import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
+import { useAppSelector } from "@/app/hooks";
+import { useEffect } from "react";
+
 
 const LoginScreen = () => {
+
+    const user = useAppSelector((state) => state.user);
 
     const {
         register,
@@ -21,6 +26,8 @@ const LoginScreen = () => {
     const submit = (data: LoginFormData) => {
         console.log(data);
     };
+
+
 
 
     return (
