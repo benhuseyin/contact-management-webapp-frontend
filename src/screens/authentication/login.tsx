@@ -9,6 +9,7 @@ import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
 import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
 import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
 import { useAppSelector } from "@/app/hooks";
+import { Link } from "react-router-dom";
 
 
 const LoginScreen = () => {
@@ -25,8 +26,6 @@ const LoginScreen = () => {
     const submit = (data: LoginFormData) => {
         console.log(data);
     };
-
-
 
 
     return (
@@ -52,9 +51,20 @@ const LoginScreen = () => {
                         </p>
                     </div>
 
-
                     <Button type="submit" className="mt-5">LOGIN</Button>
                 </form>
+
+                <div className="space-y-2 text-sm text-center">
+                    <p>
+                        Don’t have an account?{" "}
+                        <Link to="/register" className="text-blue-600 hover:underline">
+                            Register now
+                        </Link>
+                    </p>
+                    <Link to="/forgot-password" className="text-blue-600 hover:underline">
+                        Forgotten password?
+                    </Link>
+                </div>
 
             </OnboardingPageWrapper >
         </div>
