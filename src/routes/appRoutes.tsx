@@ -1,5 +1,7 @@
+import ProtectedLayout from "@/components/ScreenComponents/ProtectedLayout";
 import LoginScreen from "@/screens/authentication/login";
 import RegisterScreen from "@/screens/authentication/register";
+import Dashboard from "@/screens/dashboard";
 
 export const routes = [
   {
@@ -13,6 +15,14 @@ export const routes = [
   {
     path: "/register",
     element: <RegisterScreen />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedLayout>
+        <Dashboard />
+      </ProtectedLayout>
+    ),
   },
   {
     path: "*",
