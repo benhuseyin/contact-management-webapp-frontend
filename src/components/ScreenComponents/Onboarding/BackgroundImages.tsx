@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
 import classNames from "classnames"
 
-
 import BgImage from "@/assets/images/LoginBackground.webp"
 import RedBgImage from "@/assets/images/RegisterBackground.webp"
 
@@ -31,6 +30,7 @@ const BackgroundImages = () => {
                 className={classNames("absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90", {
                     "animate-spin": hasAnimation
                 })}
+
             />
         </Fragment>
     )

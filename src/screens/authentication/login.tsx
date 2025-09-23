@@ -7,6 +7,7 @@ import { LoginSchema } from "@/utils/schemas";
 import type { LoginFormData } from "@/utils/types";
 import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
 import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
+import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
 
 const LoginScreen = () => {
 
@@ -27,7 +28,7 @@ const LoginScreen = () => {
 
             <BackgroundImages />
 
-            <div className="border border-black z-50 p-10 rounded-sm space-y-10 shadow-lg text-neutral-200 backdrop-blur-xl !text-black">
+            <OnboardingPageWrapper classNames="sm:!w-[450px]">
                 <CardHeader title="Welcome Back!" description="Enter Your Username & Password" />
 
                 <form className="space-y-5 z-50" onSubmit={handleSubmit(submit)}>
@@ -48,9 +49,10 @@ const LoginScreen = () => {
 
                     <Button type="submit" className="mt-5">LOGIN</Button>
                 </form>
-            </div>
 
+            </OnboardingPageWrapper >
         </div>
+
     );
 
 }

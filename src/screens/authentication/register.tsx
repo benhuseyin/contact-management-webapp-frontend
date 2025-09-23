@@ -1,5 +1,6 @@
 import BackgroundImages from "@/components/ScreenComponents/Onboarding/BackgroundImages";
 import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
+import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RegisterSchema } from "@/utils/schemas";
@@ -23,9 +24,8 @@ const RegisterScreen = () => {
         <div className="flex">
             <BackgroundImages />
 
-            <div className="border border-black z-50 p-10 rounded-sm space-y-10 shadow-lg text-neutral-200 backdrop-blur-xl !text-black">
+            <OnboardingPageWrapper>
                 <CardHeader
-                    classNames="max-w-[419px]"
                     title="Welcome to Contact Management App!"
                     description="Register to Contact Management App, and start organize your contacts!"
                 />
@@ -55,7 +55,7 @@ const RegisterScreen = () => {
 
                     <Button type="submit" className="mt-5">LOGIN</Button>
                 </form>
-            </div>
+            </OnboardingPageWrapper>
 
         </div>
     );
