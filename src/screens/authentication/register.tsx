@@ -8,6 +8,8 @@ import type { RegisterFormData } from "@/utils/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import BgImage from "@/assets/images/RegisterBackground.webp"
+import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
+import { Link } from "react-router-dom";
 
 const RegisterScreen = () => {
 
@@ -56,6 +58,13 @@ const RegisterScreen = () => {
 
                     <Button type="submit" className="mt-5">REGISTER</Button>
                 </form>
+
+                <AuthFooterItem>
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-blue-600 hover:underline">
+                        Login
+                    </Link>
+                </AuthFooterItem>
             </OnboardingPageWrapper>
 
         </div>
