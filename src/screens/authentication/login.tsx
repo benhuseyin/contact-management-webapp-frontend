@@ -56,7 +56,7 @@ const LoginScreen = () => {
                     <Button type="submit" className="mt-2.5">LOGIN</Button>
                 </form>
 
-                <div className="space-y-2 text-sm text-center">
+                <div className="space-y-2">
                     <AuthFooterItem>
                         Don’t have an account?{" "}
                         <Link to="/register" className="text-blue-600 hover:underline">

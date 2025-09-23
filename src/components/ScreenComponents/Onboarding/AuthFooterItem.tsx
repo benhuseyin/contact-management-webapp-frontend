@@ -5,7 +5,7 @@ interface Props {
 }
 
 const AuthFooterItem = ({ children }: Props) => {
-    return <p>{children}</p>
+    return <p className="text-sm text-center">{children}</p>
 }
 
 export default AuthFooterItem 
