@@ -7,10 +7,14 @@ interface Props {
 }
 
 const ProtectedLayout = ({ children }: Props) => {
-    const { isAuthenticated } = useAppSelector((state) => state.user)
+    const { user } = useAppSelector((state) => state.user)
 
-    if (!isAuthenticated) {
+
+    if (!user?.token) {
         return <Navigate to="/login" />
+    } else {
+        return <Navigate to="/dashboard" />
+
     }
 
     return children;

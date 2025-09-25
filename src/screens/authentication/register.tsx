@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUserMutation } from "@/services/auth";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
-import { LoaderCircle, TriangleAlert } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 import BackendErrorItem from "@/components/ScreenComponents/Onboarding/BackendErrorItem";
 
 const RegisterScreen = () => {
@@ -35,7 +35,6 @@ const RegisterScreen = () => {
                 email: data.email,
                 password: data.password,
             }).unwrap();
-
 
             dispatch(setUser({
                 id: result._id,

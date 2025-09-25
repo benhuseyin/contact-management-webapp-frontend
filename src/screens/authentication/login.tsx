@@ -12,12 +12,13 @@ import BgImage from "@/assets/images/LoginBackground.webp"
 import BackgroundImage from "@/components/ScreenComponents/Onboarding/BackgroundImage";
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
 import { useLoginUserMutation } from "@/services/auth";
-import { useAppDispatch } from "@/app/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
 import { LoaderCircle } from "lucide-react";
 import BackendErrorItem from "@/components/ScreenComponents/Onboarding/BackendErrorItem";
 
 const LoginScreen = () => {
+    const { user } = useAppSelector((state) => state.user)
 
     const [loginUser, { isLoading, error }] = useLoginUserMutation();
     const navigate = useNavigate();
@@ -38,11 +39,12 @@ const LoginScreen = () => {
                 password: data.password
             }).unwrap();
 
-
             dispatch(setUser({
                 email: data.email,
                 token: result.accessToken
             }));
+
+            console.log('result.accessToken', result.accessToken)
 
             navigate("/dashboard");
         } catch (err) {
@@ -50,7 +52,7 @@ const LoginScreen = () => {
         }
     };
 
-    console.log((error?.data.message))
+    console.log('redux token', user?.token)
     return (
         <div className="flex">
 
