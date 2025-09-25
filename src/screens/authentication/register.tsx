@@ -9,13 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import BgImage from "@/assets/images/RegisterBackground.webp"
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useRegisterUserMutation } from "@/services/auth";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
+import { LoaderCircle } from 'lucide-react';
+
 
 const RegisterScreen = () => {
-    const [registerUser] = useRegisterUserMutation();
+    const [registerUser, { isLoading: isRegisterLoading }] = useRegisterUserMutation();
 
     const dispatch = useAppDispatch();
 
@@ -38,7 +40,8 @@ const RegisterScreen = () => {
                 username: data.username,
                 email: data.email
             }));
-            console.log('User registered:', result);
+
+            return <Navigate to="/dashboard" />
         } catch (err) {
             console.error(err);
         }
@@ -78,7 +81,7 @@ const RegisterScreen = () => {
                     </div>
 
 
-                    <Button type="submit" className="mt-5">REGISTER</Button>
+                    <Button type="submit" className="mt-5 min-w-[115px]" disabled={isRegisterLoading}>{isRegisterLoading ? <LoaderCircle className="animate-spin" /> : 'REGISTER'} </Button>
                 </form>
 
                 <AuthFooterItem>

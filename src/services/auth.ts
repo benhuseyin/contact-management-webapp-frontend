@@ -3,7 +3,7 @@ import type { RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
 
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
-    reducerPath: 'pokemonApi',
+    reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001/api/users/' }),
     endpoints: (build) => ({
         registerUser: build.mutation<RegisterResponseBody, RegisterRequestBody>({
