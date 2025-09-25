@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import BgImage from "@/assets/images/RegisterBackground.webp"
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUserMutation } from "@/services/auth";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
@@ -19,6 +19,7 @@ import classNames from "classnames";
 
 const RegisterScreen = () => {
     const [registerUser, { isLoading: isRegisterLoading, error }] = useRegisterUserMutation();
+    const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
 
@@ -29,23 +30,24 @@ const RegisterScreen = () => {
     } = useForm<RegisterFormData>({ resolver: zodResolver(RegisterSchema) });
 
     const submit = async (data: RegisterFormData) => {
+        try {
+            const result = await registerUser({
+                username: data.username,
+                email: data.email,
+                password: data.password,
+            }).unwrap();
 
-        const result = await registerUser({
-            username: data.username,
-            email: data.email,
-            password: data.password,
-        }).unwrap();
 
-        if (error) return
+            dispatch(setUser({
+                id: result._id,
+                username: data.username,
+                email: data.email
+            }));
 
-        dispatch(setUser({
-            id: result._id,
-            username: data.username,
-            email: data.email
-        }));
-
-        return <Navigate to="/dashboard" />
-
+            navigate("/dashboard");
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     return (
