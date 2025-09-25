@@ -14,7 +14,8 @@ import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterI
 import { useLoginUserMutation } from "@/services/auth";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
-import { LoaderCircle, TriangleAlert } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
+import BackendErrorItem from "@/components/ScreenComponents/Onboarding/BackendErrorItem";
 
 const LoginScreen = () => {
 
@@ -49,13 +50,13 @@ const LoginScreen = () => {
         }
     };
 
-
+    console.log((error?.data.message))
     return (
         <div className="flex">
 
             <BackgroundImage wrapperClassNames="rotate-90" imgSrc={BgImage} />
 
-            <OnboardingPageWrapper classNames="sm:!w-[450px]">
+            <OnboardingPageWrapper wrapperClassNames="sm:!w-[450px]" hasError={error && error?.data.message.length > 0}>
                 <CardHeader title="Welcome Back!" description="Enter Your Username & Password" />
 
                 <form className="space-y-5 z-50" onSubmit={handleSubmit(handleOnsubmit)}>
@@ -73,7 +74,7 @@ const LoginScreen = () => {
                         </p>
                     </div>
 
-                    {error && <p className="text-red-500 text-sm p-5 bg-[#FDD1DF] border border-red-300 rounded-sm flex justify-center items-center gap-x-2.5"><TriangleAlert size={16} /> {error.data.message}</p>}
+                    <BackendErrorItem errorMessage={error?.data.message} />
 
                     <Button type="submit" className="mt-2.5">
                         {isLoading ? <LoaderCircle className="animate-spin" size={16} /> : 'LOGIN'}
