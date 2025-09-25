@@ -13,7 +13,8 @@ import { Link, Navigate } from "react-router-dom";
 import { useRegisterUserMutation } from "@/services/auth";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle, TriangleAlert } from 'lucide-react';
+import classNames from "classnames";
 
 
 const RegisterScreen = () => {
@@ -51,7 +52,9 @@ const RegisterScreen = () => {
         <div className="flex">
             <BackgroundImage imgSrc={BgImage} />
 
-            <OnboardingPageWrapper>
+            <OnboardingPageWrapper classNames={classNames({
+                "animate-fade-in": error
+            })}>
                 <CardHeader
                     title="Welcome to Contact Management App!"
                     description="Register to Contact Management App, and start organize your contacts!"
@@ -79,10 +82,10 @@ const RegisterScreen = () => {
                         </p>
                     </div>
 
-                    {error && <p>{error.data.message}</p>}
+                    {error && <p className="text-red-500 text-sm p-5 bg-[#FDD1DF] border border-red-300 rounded-sm flex justify-center items-center gap-x-2.5"><TriangleAlert size={16} /> {error.data.message}</p>}
 
                     <Button type="submit" className="mt-5 min-w-[115px]" disabled={isRegisterLoading}>
-                        {isRegisterLoading ? <LoaderCircle className="animate-spin" /> : 'REGISTER'}
+                        {isRegisterLoading ? <LoaderCircle className="animate-spin" size={16} /> : 'REGISTER'}
                     </Button>
                 </form>
 
