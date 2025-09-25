@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import type { RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
+import type { LoginRequestBody, LoginResponseBody, RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
 import { customBaseQuery } from './customBaseQuery'
 
 
@@ -16,9 +16,16 @@ export const authApi = createApi({
                 body,
             }),
         }),
+        loginUser: build.mutation<LoginResponseBody, LoginRequestBody>({
+            query: (body) => ({
+                url: 'login',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useRegisterUserMutation } = authApi
+export const { useRegisterUserMutation, useLoginUserMutation } = authApi

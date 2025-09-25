@@ -7,15 +7,21 @@ import { LoginSchema } from "@/utils/schemas";
 import type { LoginFormData } from "@/utils/types";
 import CardHeader from "@/components/ScreenComponents/Onboarding/CardHeader";
 import OnboardingPageWrapper from "@/components/ScreenComponents/Onboarding/OnboardingPageWrapper";
-import { useAppSelector } from "@/app/hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BgImage from "@/assets/images/LoginBackground.webp"
 import BackgroundImage from "@/components/ScreenComponents/Onboarding/BackgroundImage";
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
+import { useLoginUserMutation } from "@/services/auth";
+import { useAppDispatch } from "@/app/hooks";
+import { setUser } from "@/features/user/user";
+import { LoaderCircle, TriangleAlert } from "lucide-react";
 
 const LoginScreen = () => {
 
-    const user = useAppSelector((state) => state.user);
+    const [loginUser, { isLoading, error }] = useLoginUserMutation();
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch();
 
     const {
         register,
@@ -24,8 +30,23 @@ const LoginScreen = () => {
     } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
 
 
-    const handleOnsubmit = (data: LoginFormData) => {
-        console.log(data);
+    const handleOnsubmit = async (data: LoginFormData) => {
+        try {
+            const result = await loginUser({
+                email: data.email,
+                password: data.password
+            }).unwrap();
+
+
+            dispatch(setUser({
+                email: data.email,
+                token: result.accessToken
+            }));
+
+            navigate("/dashboard");
+        } catch (err) {
+            console.error(err)
+        }
     };
 
 
@@ -33,7 +54,6 @@ const LoginScreen = () => {
         <div className="flex">
 
             <BackgroundImage wrapperClassNames="rotate-90" imgSrc={BgImage} />
-
 
             <OnboardingPageWrapper classNames="sm:!w-[450px]">
                 <CardHeader title="Welcome Back!" description="Enter Your Username & Password" />
@@ -53,7 +73,11 @@ const LoginScreen = () => {
                         </p>
                     </div>
 
-                    <Button type="submit" className="mt-2.5">LOGIN</Button>
+                    {error && <p className="text-red-500 text-sm p-5 bg-[#FDD1DF] border border-red-300 rounded-sm flex justify-center items-center gap-x-2.5"><TriangleAlert size={16} /> {error.data.message}</p>}
+
+                    <Button type="submit" className="mt-2.5">
+                        {isLoading ? <LoaderCircle className="animate-spin" size={16} /> : 'LOGIN'}
+                    </Button>
                 </form>
 
                 <div className="space-y-2">
