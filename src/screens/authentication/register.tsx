@@ -17,7 +17,7 @@ import { LoaderCircle } from 'lucide-react';
 
 
 const RegisterScreen = () => {
-    const [registerUser, { isLoading: isRegisterLoading }] = useRegisterUserMutation();
+    const [registerUser, { isLoading: isRegisterLoading, error }] = useRegisterUserMutation();
 
     const dispatch = useAppDispatch();
 
@@ -28,25 +28,24 @@ const RegisterScreen = () => {
     } = useForm<RegisterFormData>({ resolver: zodResolver(RegisterSchema) });
 
     const submit = async (data: RegisterFormData) => {
-        try {
-            const result = await registerUser({
-                username: data.username,
-                email: data.email,
-                password: data.password,
-            }).unwrap();
 
-            dispatch(setUser({
-                id: result._id,
-                username: data.username,
-                email: data.email
-            }));
+        const result = await registerUser({
+            username: data.username,
+            email: data.email,
+            password: data.password,
+        }).unwrap();
 
-            return <Navigate to="/dashboard" />
-        } catch (err) {
-            console.error(err);
-        }
+        if (error) return
+
+        dispatch(setUser({
+            id: result._id,
+            username: data.username,
+            email: data.email
+        }));
+
+        return <Navigate to="/dashboard" />
+
     };
-
 
     return (
         <div className="flex">
@@ -80,8 +79,11 @@ const RegisterScreen = () => {
                         </p>
                     </div>
 
+                    {error && <p>{error.data.message}</p>}
 
-                    <Button type="submit" className="mt-5 min-w-[115px]" disabled={isRegisterLoading}>{isRegisterLoading ? <LoaderCircle className="animate-spin" /> : 'REGISTER'} </Button>
+                    <Button type="submit" className="mt-5 min-w-[115px]" disabled={isRegisterLoading}>
+                        {isRegisterLoading ? <LoaderCircle className="animate-spin" /> : 'REGISTER'}
+                    </Button>
                 </form>
 
                 <AuthFooterItem>

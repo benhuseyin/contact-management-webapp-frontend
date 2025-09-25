@@ -1,0 +1,20 @@
+import { fetchBaseQuery, } from "@reduxjs/toolkit/query/react";
+import type { BaseQueryFn } from "@reduxjs/toolkit/query";
+import type { BackendErrorResponse } from "@/utils/types";
+// orijinal baseQuery
+const rawBaseQuery = fetchBaseQuery({ baseUrl: "http://localhost:5001/api/users/", });
+
+// wrapper baseQuery 
+export const customBaseQuery: BaseQueryFn<any, unknown, BackendErrorResponse> = async (
+    args,
+    api,
+    extraOptions) => {
+    const result = await rawBaseQuery(args, api, extraOptions);
+
+    if ("error" in result && result.error) {
+        const err = result.error as BackendErrorResponse;
+        return {
+            error: { data: (err.data as BackendErrorResponse["data"]) ?? { title: err?.data?.title, message: err.data.message, }, status: String(err.status), },
+        };
+    } return result;
+};

@@ -15,3 +15,12 @@ export type RegisterResponseBody = {
     _id: string;
     email: string;
 }
+
+export type BackendErrorResponse = {
+    data: {
+        title: string;
+        message: string;
+        stackTrace?: string;
+    },
+    status: string
+};

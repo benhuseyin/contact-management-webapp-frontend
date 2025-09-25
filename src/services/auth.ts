@@ -1,10 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import type { RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
+import { customBaseQuery } from './customBaseQuery'
+
+
 
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001/api/users/' }),
+    baseQuery: customBaseQuery,
     endpoints: (build) => ({
         registerUser: build.mutation<RegisterResponseBody, RegisterRequestBody>({
             query: (body) => ({
