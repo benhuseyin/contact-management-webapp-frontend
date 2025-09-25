@@ -29,7 +29,7 @@ const RegisterScreen = () => {
         formState: { errors },
     } = useForm<RegisterFormData>({ resolver: zodResolver(RegisterSchema) });
 
-    const submit = async (data: RegisterFormData) => {
+    const handleOnsubmit = async (data: RegisterFormData) => {
         try {
             const result = await registerUser({
                 username: data.username,
@@ -62,7 +62,7 @@ const RegisterScreen = () => {
                     description="Register to Contact Management App, and start organize your contacts!"
                 />
 
-                <form className="space-y-5 z-50" onSubmit={handleSubmit(submit)}>
+                <form className="space-y-5 z-50" onSubmit={handleSubmit(handleOnsubmit)}>
                     <div className="space-y-2">
                         <Input {...(register("username"))} placeholder="Username" />
                         <p className="text-red-500 text-xs h-1">

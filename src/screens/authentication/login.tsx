@@ -24,7 +24,7 @@ const LoginScreen = () => {
     } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
 
 
-    const submit = (data: LoginFormData) => {
+    const handleOnsubmit = (data: LoginFormData) => {
         console.log(data);
     };
 
@@ -38,7 +38,7 @@ const LoginScreen = () => {
             <OnboardingPageWrapper classNames="sm:!w-[450px]">
                 <CardHeader title="Welcome Back!" description="Enter Your Username & Password" />
 
-                <form className="space-y-5 z-50" onSubmit={handleSubmit(submit)}>
+                <form className="space-y-5 z-50" onSubmit={handleSubmit(handleOnsubmit)}>
                     <div className="space-y-2">
                         <Input {...(register("email"))} placeholder="E-mail" />
                         <p className="text-red-500 text-xs h-1">
