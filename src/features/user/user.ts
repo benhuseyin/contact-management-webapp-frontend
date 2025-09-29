@@ -31,8 +31,8 @@ const userSlice = createSlice({
         // when login/register is success, code which is below will use
         setUser: (state, action: PayloadAction<User>) => {
             state.currentUser = action.payload;
+            state.token = action.payload.token ?? null;
             state.isAuthenticated = true;
-            state.error = null;
         },
         // logout
         clearUser: (state) => {

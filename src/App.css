@@ -8,6 +8,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100% !important;
 }
 
 .logo {
@@ -252,7 +253,8 @@ h1 {
     font-size: 25px;
   }
 
-  p {
+  p,
+  span {
     font-size: 14px;
   }
 }
