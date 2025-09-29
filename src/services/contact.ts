@@ -3,8 +3,8 @@ import type { CurrentResponseBody, LoginRequestBody, LoginResponseBody, Register
 import { customBaseQuery } from './customBaseQuery'
 
 // Define a service using a base URL and expected endpoints
-export const userApi = createApi({
-    reducerPath: 'userApi',
+export const authApi = createApi({
+    reducerPath: 'authApi',
     baseQuery: customBaseQuery,
     endpoints: (build) => ({
         registerUser: build.mutation<RegisterResponseBody, RegisterRequestBody>({
@@ -32,4 +32,4 @@ export const userApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useRegisterUserMutation, useLoginUserMutation, useLazyGetCurrentUserQuery } = userApi
+export const { useRegisterUserMutation, useLoginUserMutation, useLazyGetCurrentUserQuery } = authApi
