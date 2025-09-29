@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import BgImage from "@/assets/images/LoginBackground.webp"
 import BackgroundImage from "@/components/ScreenComponents/Onboarding/BackgroundImage";
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
-import { useLoginUserMutation } from "@/services/auth";
+import { useLoginUserMutation } from "@/services/user";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
 import { LoaderCircle } from "lucide-react";

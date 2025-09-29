@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import BgImage from "@/assets/images/RegisterBackground.webp"
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
 import { Link, useNavigate } from "react-router-dom";
-import { useRegisterUserMutation } from "@/services/auth";
+import { useRegisterUserMutation } from "@/services/user";
 import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
 import { LoaderCircle } from 'lucide-react';

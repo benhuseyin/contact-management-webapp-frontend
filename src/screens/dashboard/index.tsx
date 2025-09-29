@@ -1,6 +1,6 @@
 import type { RootState } from "@/app/store";
 import { Input } from "@/components/ui/input";
-import { useLazyGetCurrentUserQuery } from "@/services/auth";
+import { useLazyGetCurrentUserQuery } from "@/services/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Search, EllipsisVertical } from 'lucide-react';
@@ -41,7 +41,10 @@ const Dashboard = () => {
                     <p className="!text-xl">{currentUser?.user.username}</p>
                     <span>X contacts</span>
                 </div>
-                <EllipsisVertical className="ml-auto" />
+                <div className="ml-auto bg-[#F0F0F0] rounded-full p-2.5">
+                    <EllipsisVertical />
+                </div>
+
             </div>
             <div>
                 <Input className="!border-none rounded-2xl bg-[#F0F0F0]" placeholder="Search..." prefix={<Search />} />
