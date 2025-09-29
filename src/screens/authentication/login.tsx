@@ -12,14 +12,12 @@ import BgImage from "@/assets/images/LoginBackground.webp"
 import BackgroundImage from "@/components/ScreenComponents/Onboarding/BackgroundImage";
 import AuthFooterItem from "@/components/ScreenComponents/Onboarding/AuthFooterItem";
 import { useLoginUserMutation } from "@/services/auth";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/features/user/user";
 import { LoaderCircle } from "lucide-react";
 import BackendErrorItem from "@/components/ScreenComponents/Onboarding/BackendErrorItem";
 
 const LoginScreen = () => {
-    const { user } = useAppSelector((state) => state.user)
-
     const [loginUser, { isLoading, error }] = useLoginUserMutation();
     const navigate = useNavigate();
 
@@ -41,10 +39,9 @@ const LoginScreen = () => {
 
             dispatch(setUser({
                 email: data.email,
-                token: result.accessToken
             }));
 
-            console.log('result.accessToken', result.accessToken)
+            localStorage.setItem("token", result.accessToken);
 
             navigate("/dashboard");
         } catch (err) {
@@ -52,7 +49,6 @@ const LoginScreen = () => {
         }
     };
 
-    console.log('redux token', user?.token)
     return (
         <div className="flex">
 
@@ -78,7 +74,7 @@ const LoginScreen = () => {
 
                     <BackendErrorItem errorMessage={error?.data.message} />
 
-                    <Button type="submit" className="mt-2.5">
+                    <Button type="submit" className="mt-2.5 min-w-[88px]">
                         {isLoading ? <LoaderCircle className="animate-spin" size={16} /> : 'LOGIN'}
                     </Button>
                 </form>

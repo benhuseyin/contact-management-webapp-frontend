@@ -5,12 +5,10 @@ export interface User {
     id?: string;
     username?: string;
     email?: string;
-    token?: string;
 }
 
 interface UserState {
     user: User | null;
-    token: string | null,
     isAuthenticated: boolean;
     loading: boolean;
     error: string | null;
@@ -18,7 +16,6 @@ interface UserState {
 
 const initialState: UserState = {
     user: null,
-    token: null,
     isAuthenticated: false,
     loading: false,
     error: null,
