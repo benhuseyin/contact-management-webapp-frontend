@@ -5,6 +5,7 @@ export interface User {
     id?: string;
     username?: string;
     email?: string;
+    token?: string;
 }
 
 interface UserState {
@@ -12,6 +13,7 @@ interface UserState {
     isAuthenticated: boolean;
     loading: boolean;
     error: string | null;
+    token: string | null;
 }
 
 const initialState: UserState = {
@@ -19,6 +21,7 @@ const initialState: UserState = {
     isAuthenticated: false,
     loading: false,
     error: null,
+    token: null,
 };
 
 const userSlice = createSlice({

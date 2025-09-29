@@ -39,9 +39,8 @@ const LoginScreen = () => {
 
             dispatch(setUser({
                 email: data.email,
+                token: result.accessToken,
             }));
-
-            localStorage.setItem("token", result.accessToken);
 
             navigate("/dashboard");
         } catch (err) {
