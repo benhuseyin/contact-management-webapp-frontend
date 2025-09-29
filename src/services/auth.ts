@@ -9,21 +9,21 @@ export const authApi = createApi({
     endpoints: (build) => ({
         registerUser: build.mutation<RegisterResponseBody, RegisterRequestBody>({
             query: (body) => ({
-                url: 'register',
+                url: '/users/register',
                 method: 'POST',
                 body,
             }),
         }),
         loginUser: build.mutation<LoginResponseBody, LoginRequestBody>({
             query: (body) => ({
-                url: 'login',
+                url: '/users/login',
                 method: 'POST',
                 body,
             }),
         }),
         getCurrentUser: build.query<CurrentResponseBody, void>({
             query: () => ({
-                url: "current",
+                url: "/users/current",
                 method: "GET",
             }),
         }),

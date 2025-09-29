@@ -4,7 +4,7 @@ import type { BackendErrorResponse } from "@/utils/types";
 import type { RootState } from "@/app/store";
 // orijinal baseQuery
 const rawBaseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:5001/api/users/",
+    baseUrl: "http://localhost:5001/api",
     prepareHeaders: (headers, { getState }) => {
         const state = getState() as RootState; // redux state
         const token = state.user.token;       // redux persist ile saklanan token
