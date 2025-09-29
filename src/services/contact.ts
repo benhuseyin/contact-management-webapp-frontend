@@ -1,15 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import type { CurrentResponseBody, LoginRequestBody, LoginResponseBody, RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
+import type { CreateContactRequestBody, CreateContactResponseBody, GetContactResponseBody, LoginRequestBody, LoginResponseBody } from '@/utils/types'
 import { customBaseQuery } from './customBaseQuery'
 
 // Define a service using a base URL and expected endpoints
-export const authApi = createApi({
-    reducerPath: 'authApi',
+export const contactApi = createApi({
+    reducerPath: 'contactApi',
     baseQuery: customBaseQuery,
     endpoints: (build) => ({
-        registerUser: build.mutation<RegisterResponseBody, RegisterRequestBody>({
+        createContact: build.mutation<CreateContactResponseBody, CreateContactRequestBody>({
             query: (body) => ({
-                url: '/users/register',
+                url: '/contacts/',
                 method: 'POST',
                 body,
             }),
@@ -21,9 +21,9 @@ export const authApi = createApi({
                 body,
             }),
         }),
-        getCurrentUser: build.query<CurrentResponseBody, void>({
+        getContacts: build.query<GetContactResponseBody, void>({
             query: () => ({
-                url: "/users/current",
+                url: "/contacts/",
                 method: "GET",
             }),
         }),
@@ -32,4 +32,4 @@ export const authApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useRegisterUserMutation, useLoginUserMutation, useLazyGetCurrentUserQuery } = authApi
+export const { useCreateContactMutation, useLoginUserMutation, useLazyGetContactsQuery } = contactApi

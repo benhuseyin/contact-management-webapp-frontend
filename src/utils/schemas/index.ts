@@ -22,3 +22,10 @@ export const RegisterSchema = z.object({
         .regex(/[0-9]/, { message: "Password must contain at least one number" })
         .regex(/[^A-Za-z0-9]/, { message: "Password must contain at least one special character" }),
 });
+
+
+export const CreateContactSchema = z.object({
+    name: z.string().min(1, { message: "The email field cannot be left blank." }).max(50, { message: "Username cannot exceed 50 characters." }),
+    email: z.email({ message: 'Please entrey a valid email address.', pattern: emailRegex }).min(1, { message: "The email field cannot be left blank." }),
+    phone: z.string().min(1, { message: "The phone name field cannot be left blank." }).max(50, { message: "Phone name cannot exceed 11 characters." }),
+});

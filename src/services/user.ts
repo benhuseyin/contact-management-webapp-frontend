@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import type { CurrentResponseBody, LoginRequestBody, LoginResponseBody, RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
+import type { CurrentUserResponseBody, LoginRequestBody, LoginResponseBody, RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
 import { customBaseQuery } from './customBaseQuery'
 
 // Define a service using a base URL and expected endpoints
@@ -21,7 +21,7 @@ export const userApi = createApi({
                 body,
             }),
         }),
-        getCurrentUser: build.query<CurrentResponseBody, void>({
+        getCurrentUser: build.query<CurrentUserResponseBody, void>({
             query: () => ({
                 url: "/users/current",
                 method: "GET",
