@@ -1,3 +1,4 @@
+import type { RootState } from "@/app/store";
 import type { ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -7,10 +8,10 @@ interface Props {
 }
 
 const ProtectedLayout = ({ children }: Props) => {
-    const token = useSelector((token) => token);
+    const token = useSelector((state: RootState) => state.user.user?.token);
 
     if (!token) {
-        return <Navigate to="/login" replace />; // token yok → login’e git
+        return <Navigate to="/login" replace />;
     }
 
     return <>{children}</>;

@@ -9,7 +9,6 @@ const Dashboard = () => {
         const fetchUser = async () => {
             try {
                 const result = await trigger().unwrap(); // async/await ile tetikleme
-                console.log("User:", result.user.username);
             } catch (err) {
                 console.error("Failed to fetch user", err);
             }
@@ -18,7 +17,6 @@ const Dashboard = () => {
         fetchUser();
     }, [trigger]);
 
-    console.log('*-*')
 
     return (<div>
         {isLoading && <p>Loading...</p>}
