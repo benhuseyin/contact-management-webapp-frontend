@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ProtectedLayout = ({ children }: Props) => {
-    const token = useSelector((state: RootState) => state.user.user?.token);
+    const token = useSelector((state: RootState) => state.user.currentUser?.token);
 
     if (!token) {
         return <Navigate to="/login" replace />;

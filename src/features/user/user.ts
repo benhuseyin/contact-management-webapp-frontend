@@ -9,7 +9,7 @@ export interface User {
 }
 
 interface UserState {
-    user: User | null;
+    currentUser: User | null;
     isAuthenticated: boolean;
     loading: boolean;
     error: string | null;
@@ -17,7 +17,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    user: null,
+    currentUser: null,
     isAuthenticated: false,
     loading: false,
     error: null,
@@ -30,13 +30,13 @@ const userSlice = createSlice({
     reducers: {
         // when login/register is success, code which is below will use
         setUser: (state, action: PayloadAction<User>) => {
-            state.user = action.payload;
+            state.currentUser = action.payload;
             state.isAuthenticated = true;
             state.error = null;
         },
         // logout
         clearUser: (state) => {
-            state.user = null;
+            state.currentUser = null;
             state.isAuthenticated = false;
         },
         // loading state controL

@@ -6,16 +6,9 @@ const Dashboard = () => {
     const [trigger, { data: currentUser, isLoading, error }] = useLazyGetCurrentUserQuery();
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const result = await trigger().unwrap(); // async/await ile tetikleme
-            } catch (err) {
-                console.error("Failed to fetch user", err);
-            }
-        };
-
-        fetchUser();
+        trigger();
     }, [trigger]);
+
 
 
     return (<div>
