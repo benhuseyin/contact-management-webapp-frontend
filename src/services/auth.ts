@@ -1,8 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import type { LoginRequestBody, LoginResponseBody, RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
+import type { CurrentRequestBody, CurrentResponseBody, LoginRequestBody, LoginResponseBody, RegisterRequestBody, RegisterResponseBody } from '@/utils/types'
 import { customBaseQuery } from './customBaseQuery'
-
-
 
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
@@ -23,9 +21,15 @@ export const authApi = createApi({
                 body,
             }),
         }),
+        getCurrentUser: build.query<CurrentResponseBody, void>({
+            query: () => ({
+                url: "current",
+                method: "GET",
+            }),
+        }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useRegisterUserMutation, useLoginUserMutation } = authApi
+export const { useRegisterUserMutation, useLoginUserMutation, useLazyGetCurrentUserQuery } = authApi

@@ -2,7 +2,16 @@ import { fetchBaseQuery, } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { BackendErrorResponse } from "@/utils/types";
 // orijinal baseQuery
-const rawBaseQuery = fetchBaseQuery({ baseUrl: "http://localhost:5001/api/users/", });
+const rawBaseQuery = fetchBaseQuery({
+    baseUrl: "http://localhost:5001/api/users/",
+    prepareHeaders: (headers) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            headers.set("authorization", `Bearer ${token}`);
+        }
+        return headers;
+    },
+});
 
 // wrapper baseQuery 
 export const customBaseQuery: BaseQueryFn<any, unknown, BackendErrorResponse> = async (

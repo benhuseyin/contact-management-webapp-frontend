@@ -34,3 +34,14 @@ export type LoginResponseBody = {
     accessToken: string;
 }
 
+export type CurrentRequestBody = {
+    timestamps: string;
+}
+
+export type CurrentResponseBody = {
+    user: {
+        id: string;
+        username: string;
+        email: string;
+    }
+}
